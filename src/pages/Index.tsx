@@ -41,7 +41,7 @@ const categoryColors = {
 };
 
 function Index() {
-  const [currentView, setCurrentView] = useState<'timer' | 'exercises' | 'stats'>('timer');
+  const [currentView, setCurrentView] = useState<'timer' | 'exercises' | 'stats' | 'settings'>('timer');
   const [breakDuration, setBreakDuration] = useState(20);
   const [timeLeft, setTimeLeft] = useState(20 * 60);
   const [isActive, setIsActive] = useState(true);
@@ -51,6 +51,9 @@ function Index() {
   const [totalMinutes, setTotalMinutes] = useState(247);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [notificationShown, setNotificationShown] = useState(false);
+  const [dailyGoal, setDailyGoal] = useState(10);
+  const [userName, setUserName] = useState('Разработчик');
+  const [reminderEnabled, setReminderEnabled] = useState(true);
 
   useEffect(() => {
     let interval: number | undefined;
@@ -340,6 +343,126 @@ function Index() {
               </Card>
             </div>
           )}
+
+          {currentView === 'settings' && (
+            <div className="animate-fade-in space-y-4">
+              <Card className="p-6 bg-gradient-to-br from-card to-muted/5">
+                <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <Icon name="User" size={20} className="text-primary" />
+                  Профиль
+                </h2>
+                
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Ваше имя</label>
+                    <input
+                      type="text"
+                      value={userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                      className="w-full px-4 py-2 bg-muted/50 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="Введите имя"
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <Icon name="Bell" size={20} className="text-accent" />
+                      <div>
+                        <p className="font-semibold text-sm">Напоминания</p>
+                        <p className="text-xs text-muted-foreground">Уведомления о перерывах</p>
+                      </div>
+                    </div>
+                    <Button
+                      variant={reminderEnabled ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setReminderEnabled(!reminderEnabled)}
+                    >
+                      {reminderEnabled ? 'Вкл' : 'Выкл'}
+                    </Button>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 bg-muted/30 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <Icon name={soundEnabled ? "Volume2" : "VolumeX"} size={20} className="text-secondary" />
+                      <div>
+                        <p className="font-semibold text-sm">Звук</p>
+                        <p className="text-xs text-muted-foreground">Звуковые уведомления</p>
+                      </div>
+                    </div>
+                    <Button
+                      variant={soundEnabled ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setSoundEnabled(!soundEnabled)}
+                    >
+                      {soundEnabled ? 'Вкл' : 'Выкл'}
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 bg-gradient-to-br from-primary/10 to-primary/5">
+                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <Icon name="Target" size={20} className="text-primary" />
+                  Цель на день
+                </h3>
+
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Упражнений в день</span>
+                    <span className="text-2xl font-bold text-primary">{dailyGoal}</span>
+                  </div>
+
+                  <div className="space-y-2">
+                    <input
+                      type="range"
+                      min="5"
+                      max="30"
+                      step="5"
+                      value={dailyGoal}
+                      onChange={(e) => setDailyGoal(Number(e.target.value))}
+                      className="w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer"
+                      style={{
+                        background: `linear-gradient(to right, hsl(var(--primary)) 0%, hsl(var(--primary)) ${((dailyGoal - 5) / 25) * 100}%, hsl(var(--muted)) ${((dailyGoal - 5) / 25) * 100}%, hsl(var(--muted)) 100%)`
+                      }}
+                    />
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>5</span>
+                      <span>15</span>
+                      <span>30</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 p-4 bg-background/50 rounded-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium">Прогресс сегодня</span>
+                      <span className="text-sm font-bold text-primary">{completedToday}/{dailyGoal}</span>
+                    </div>
+                    <Progress value={(completedToday / dailyGoal) * 100} className="h-2" />
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="p-6 bg-gradient-to-br from-secondary/10 to-accent/10">
+                <h3 className="font-semibold mb-3 flex items-center gap-2">
+                  <Icon name="Info" size={20} className="text-accent" />
+                  О приложении
+                </h3>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <p>DevFit v1.0</p>
+                  <p>Помогаем программистам заботиться о здоровье во время работы</p>
+                  <div className="mt-4 pt-4 border-t border-border">
+                    <p className="font-semibold text-foreground mb-2">Рекомендации:</p>
+                    <ul className="space-y-1 text-xs">
+                      <li>• Делайте перерыв каждые 20-25 минут</li>
+                      <li>• Используйте правило 20-20-20 для глаз</li>
+                      <li>• Регулярно меняйте позу</li>
+                      <li>• Не забывайте про растяжку</li>
+                    </ul>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          )}
         </div>
       </div>
 
@@ -347,7 +470,7 @@ function Index() {
         <div className="max-w-md mx-auto flex justify-around p-4">
           <Button
             variant={currentView === 'timer' ? 'default' : 'ghost'}
-            className="flex-col h-auto gap-1 px-6"
+            className="flex-col h-auto gap-1 px-4"
             onClick={() => setCurrentView('timer')}
           >
             <Icon name="Timer" size={24} />
@@ -355,7 +478,7 @@ function Index() {
           </Button>
           <Button
             variant={currentView === 'exercises' ? 'default' : 'ghost'}
-            className="flex-col h-auto gap-1 px-6"
+            className="flex-col h-auto gap-1 px-4"
             onClick={() => setCurrentView('exercises')}
           >
             <Icon name="Dumbbell" size={24} />
@@ -363,11 +486,19 @@ function Index() {
           </Button>
           <Button
             variant={currentView === 'stats' ? 'default' : 'ghost'}
-            className="flex-col h-auto gap-1 px-6"
+            className="flex-col h-auto gap-1 px-4"
             onClick={() => setCurrentView('stats')}
           >
             <Icon name="BarChart3" size={24} />
             <span className="text-xs">Статистика</span>
+          </Button>
+          <Button
+            variant={currentView === 'settings' ? 'default' : 'ghost'}
+            className="flex-col h-auto gap-1 px-4"
+            onClick={() => setCurrentView('settings')}
+          >
+            <Icon name="Settings" size={24} />
+            <span className="text-xs">Настройки</span>
           </Button>
         </div>
       </nav>
