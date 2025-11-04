@@ -42,7 +42,8 @@ const categoryColors = {
 
 function Index() {
   const [currentView, setCurrentView] = useState<'timer' | 'exercises' | 'stats'>('timer');
-  const [timeLeft, setTimeLeft] = useState(1200);
+  const [breakDuration, setBreakDuration] = useState(20);
+  const [timeLeft, setTimeLeft] = useState(20 * 60);
   const [isActive, setIsActive] = useState(true);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [completedToday, setCompletedToday] = useState(8);
@@ -86,7 +87,13 @@ function Index() {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const progressPercentage = ((1200 - timeLeft) / 1200) * 100;
+  const progressPercentage = ((breakDuration * 60 - timeLeft) / (breakDuration * 60)) * 100;
+  
+  const handleDurationChange = (minutes: number) => {
+    setBreakDuration(minutes);
+    setTimeLeft(minutes * 60);
+    setNotificationShown(false);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
@@ -101,6 +108,26 @@ function Index() {
         <div className="space-y-4">
           {currentView === 'timer' && (
             <div className="animate-scale-in space-y-4">
+              <Card className="p-4 bg-gradient-to-br from-muted/30 to-muted/10">
+                <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                  <Icon name="Clock" size={16} />
+                  Интервал перерыва
+                </h3>
+                <div className="flex gap-2">
+                  {[15, 20, 25, 30].map((minutes) => (
+                    <Button
+                      key={minutes}
+                      onClick={() => handleDurationChange(minutes)}
+                      variant={breakDuration === minutes ? "default" : "outline"}
+                      size="sm"
+                      className="flex-1"
+                    >
+                      {minutes} мин
+                    </Button>
+                  ))}
+                </div>
+              </Card>
+
               <Card className="p-6 border-2 border-primary/20 bg-gradient-to-br from-card to-card/50">
                 <div className="text-center space-y-4">
                   <div className="flex items-center justify-center gap-2 mb-2">
@@ -125,7 +152,7 @@ function Index() {
                       {isActive ? 'Пауза' : 'Старт'}
                     </Button>
                     <Button 
-                      onClick={() => setTimeLeft(1200)}
+                      onClick={() => handleDurationChange(breakDuration)}
                       variant="outline"
                       size="lg"
                     >
