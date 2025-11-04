@@ -48,6 +48,8 @@ function Index() {
   const [completedToday, setCompletedToday] = useState(8);
   const [streak, setStreak] = useState(12);
   const [totalMinutes, setTotalMinutes] = useState(247);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [notificationShown, setNotificationShown] = useState(false);
 
   useEffect(() => {
     let interval: number | undefined;
@@ -60,6 +62,23 @@ function Index() {
     
     return () => clearInterval(interval);
   }, [isActive, timeLeft]);
+
+  useEffect(() => {
+    if (timeLeft === 30 && !notificationShown && soundEnabled) {
+      const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGGe58OScTgwOUKfk77RiHAU7k9n0ynYpBSh+zPLaizsKFF+06+mlUxIJSKDh8bllHgYtgsz02Ik1CBdpvO7lm0wLDlCm5O+zYRsGPJPZ9Mp1KAYpfsvy2os6ChVftOvopVISCkig4e+4Yh0FLYPNc9iJNAgXar3u5JpLCw5Qpubtsl8bBj2T2fPJcyYGKn/M8tuKOQgWYLTo6aFRCwlJoe/us2AdBi6Czn7Xhy8IFmuC7+OYSwoPUKvm7rFf');
+      audio.play().catch(() => {});
+      setNotificationShown(true);
+    }
+    
+    if (timeLeft === 0 && soundEnabled) {
+      const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGGe58OScTgwOUKfk77RiHAU7k9n0ynYpBSh+zPLaizsKFF+06+mlUxIJSKDh8bllHgYtgsz02Ik1CBdpvO7lm0wLDlCm5O+zYRsGPJPZ9Mp1KAYpfsvy2os6ChVftOvopVISCkig4e+4Yh0FLYPNc9iJNAgXar3u5JpLCw5Qpubtsl8bBj2T2fPJcyYGKn/M8tuKOQgWYLTo6aFRCwlJoe/us2AdBi6Czn7Xhy8IFmuC7+OYSwoPUKvm7rFf');
+      audio.play().catch(() => {});
+    }
+    
+    if (timeLeft > 30) {
+      setNotificationShown(false);
+    }
+  }, [timeLeft, soundEnabled, notificationShown]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -112,7 +131,34 @@ function Index() {
                     >
                       <Icon name="RotateCcw" size={20} />
                     </Button>
+                    <Button 
+                      onClick={() => setSoundEnabled(!soundEnabled)}
+                      variant="outline"
+                      size="lg"
+                      className="gap-2"
+                    >
+                      <Icon name={soundEnabled ? "Volume2" : "VolumeX"} size={20} />
+                    </Button>
                   </div>
+                  
+                  {timeLeft <= 30 && timeLeft > 0 && (
+                    <div className="mt-4 p-3 bg-primary/20 border border-primary/40 rounded-lg animate-pulse-slow">
+                      <p className="text-sm font-semibold text-primary">
+                        ⏰ Перерыв через {timeLeft} секунд!
+                      </p>
+                    </div>
+                  )}
+                  
+                  {timeLeft === 0 && (
+                    <div className="mt-4 p-4 bg-accent/20 border-2 border-accent rounded-lg animate-scale-in">
+                      <p className="text-lg font-bold text-accent mb-2">
+                        🎯 Время для перерыва!
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Выбери упражнение и позаботься о здоровье
+                      </p>
+                    </div>
+                  )}
                 </div>
               </Card>
 
