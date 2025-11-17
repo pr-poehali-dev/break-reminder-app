@@ -13,17 +13,91 @@ interface Exercise {
   category: 'eyes' | 'neck' | 'hands' | 'back';
   icon: string;
   description: string;
+  steps?: string[];
+  benefits?: string[];
 }
 
 const exercises: Exercise[] = [
-  { id: '1', title: 'Круговые движения глазами', duration: 60, category: 'eyes', icon: 'Eye', description: '10 кругов по часовой, 10 против' },
-  { id: '2', title: 'Правило 20-20-20', duration: 20, category: 'eyes', icon: 'ScanEye', description: 'Смотрите на объект в 20 футах 20 секунд' },
-  { id: '3', title: 'Наклоны головы', duration: 90, category: 'neck', icon: 'MoveVertical', description: 'Влево-вправо, вперёд-назад' },
-  { id: '4', title: 'Вращения шеей', duration: 60, category: 'neck', icon: 'RotateCcw', description: 'Медленные круговые движения' },
-  { id: '5', title: 'Растяжка кистей', duration: 60, category: 'hands', icon: 'Hand', description: 'Сгибание и разгибание пальцев' },
-  { id: '6', title: 'Вращение запястий', duration: 45, category: 'hands', icon: 'RefreshCw', description: 'По часовой и против часовой' },
-  { id: '7', title: 'Наклоны вперёд', duration: 120, category: 'back', icon: 'MoveDown', description: 'Тянитесь к носкам сидя' },
-  { id: '8', title: 'Скручивания', duration: 90, category: 'back', icon: 'RotateCw', description: 'Повороты корпуса на стуле' },
+  { 
+    id: '1', 
+    title: 'Круговые движения глазами', 
+    duration: 60, 
+    category: 'eyes', 
+    icon: 'Eye', 
+    description: '10 кругов по часовой, 10 против',
+    steps: ['Сядьте прямо, расслабьте плечи', 'Смотрите вверх, затем медленно двигайте взгляд по кругу', 'Сделайте 10 кругов по часовой стрелке', 'Затем 10 кругов против часовой стрелки', 'Не двигайте головой, только глазами'],
+    benefits: ['Снимает напряжение глазных мышц', 'Улучшает кровообращение', 'Предотвращает сухость глаз']
+  },
+  { 
+    id: '2', 
+    title: 'Правило 20-20-20', 
+    duration: 20, 
+    category: 'eyes', 
+    icon: 'ScanEye', 
+    description: 'Смотрите на объект в 20 футах 20 секунд',
+    steps: ['Каждые 20 минут работы делайте перерыв', 'Найдите объект на расстоянии около 6 метров', 'Смотрите на него в течение 20 секунд', 'Моргайте естественно', 'Повторяйте регулярно'],
+    benefits: ['Профилактика близорукости', 'Уменьшает усталость глаз', 'Помогает фокусировке']
+  },
+  { 
+    id: '3', 
+    title: 'Наклоны головы', 
+    duration: 90, 
+    category: 'neck', 
+    icon: 'MoveVertical', 
+    description: 'Влево-вправо, вперёд-назад',
+    steps: ['Сядьте прямо, расслабьте плечи', 'Медленно наклоните голову к правому плечу', 'Задержитесь на 5 секунд', 'Повторите для левой стороны', 'Наклоните голову вперед к груди', 'Затем откиньте назад (осторожно)'],
+    benefits: ['Снимает напряжение в шее', 'Улучшает гибкость', 'Уменьшает головную боль']
+  },
+  { 
+    id: '4', 
+    title: 'Вращения шеей', 
+    duration: 60, 
+    category: 'neck', 
+    icon: 'RotateCcw', 
+    description: 'Медленные круговые движения',
+    steps: ['Выпрямите спину', 'Медленно поверните голову вправо', 'Опустите подбородок к груди', 'Поверните голову влево', 'Поднимите подбородок', 'Повторите 5 раз в каждую сторону'],
+    benefits: ['Расслабляет мышцы шеи', 'Улучшает подвижность', 'Снижает риск защемлений']
+  },
+  { 
+    id: '5', 
+    title: 'Растяжка кистей', 
+    duration: 60, 
+    category: 'hands', 
+    icon: 'Hand', 
+    description: 'Сгибание и разгибание пальцев',
+    steps: ['Вытяните руки перед собой', 'Сожмите кулаки на 5 секунд', 'Резко разожмите и растопырьте пальцы', 'Повторите 10 раз', 'Помассируйте каждый палец'],
+    benefits: ['Предотвращает туннельный синдром', 'Улучшает кровообращение в руках', 'Снимает усталость от печатания']
+  },
+  { 
+    id: '6', 
+    title: 'Вращение запястий', 
+    duration: 45, 
+    category: 'hands', 
+    icon: 'RefreshCw', 
+    description: 'По часовой и против часовой',
+    steps: ['Вытяните руки вперед', 'Вращайте запястьями по кругу', '10 раз по часовой стрелке', '10 раз против часовой', 'Потрясите руками для расслабления'],
+    benefits: ['Снимает напряжение в запястьях', 'Профилактика туннельного синдрома', 'Улучшает гибкость']
+  },
+  { 
+    id: '7', 
+    title: 'Наклоны вперёд', 
+    duration: 120, 
+    category: 'back', 
+    icon: 'MoveDown', 
+    description: 'Тянитесь к носкам сидя',
+    steps: ['Встаньте со стула', 'Медленно наклонитесь вперед', 'Тянитесь руками к полу', 'Не сгибайте колени сильно', 'Задержитесь на 10-15 секунд', 'Медленно выпрямитесь'],
+    benefits: ['Растягивает позвоночник', 'Снимает напряжение в пояснице', 'Улучшает гибкость спины']
+  },
+  { 
+    id: '8', 
+    title: 'Скручивания', 
+    duration: 90, 
+    category: 'back', 
+    icon: 'RotateCw', 
+    description: 'Повороты корпуса на стуле',
+    steps: ['Сядьте прямо на стул', 'Положите правую руку на левое колено', 'Поверните корпус влево', 'Задержитесь на 10 секунд', 'Повторите для другой стороны', 'Сделайте 5 повторов на каждую сторону'],
+    benefits: ['Снимает напряжение в спине', 'Улучшает подвижность позвоночника', 'Массирует внутренние органы']
+  },
 ];
 
 const categoryNames = {
@@ -54,6 +128,9 @@ function Index() {
   const [dailyGoal, setDailyGoal] = useState(10);
   const [userName, setUserName] = useState('Разработчик');
   const [reminderEnabled, setReminderEnabled] = useState(true);
+  const [exerciseTimeLeft, setExerciseTimeLeft] = useState<number | null>(null);
+  const [isExerciseActive, setIsExerciseActive] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
     let interval: number | undefined;
@@ -97,6 +174,48 @@ function Index() {
     setTimeLeft(minutes * 60);
     setNotificationShown(false);
   };
+
+  const startExercise = (exercise: Exercise) => {
+    setSelectedExercise(exercise);
+    setExerciseTimeLeft(exercise.duration);
+    setIsExerciseActive(false);
+    setCurrentStep(0);
+  };
+
+  const toggleExerciseTimer = () => {
+    setIsExerciseActive(!isExerciseActive);
+  };
+
+  const completeExercise = () => {
+    setCompletedToday(prev => prev + 1);
+    setTotalMinutes(prev => prev + Math.ceil((selectedExercise?.duration || 0) / 60));
+    setSelectedExercise(null);
+    setExerciseTimeLeft(null);
+    setIsExerciseActive(false);
+    setCurrentStep(0);
+  };
+
+  useEffect(() => {
+    let interval: number | undefined;
+    
+    if (isExerciseActive && exerciseTimeLeft !== null && exerciseTimeLeft > 0) {
+      interval = setInterval(() => {
+        setExerciseTimeLeft(time => {
+          if (time === null || time <= 1) {
+            setIsExerciseActive(false);
+            if (soundEnabled) {
+              const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIGGe58OScTgwOUKfk77RiHAU7k9n0ynYpBSh+zPLaizsKFF+06+mlUxIJSKDh8bllHgYtgsz02Ik1CBdpvO7lm0wLDlCm5O+zYRsGPJPZ9Mp1KAYpfsvy2os6ChVftOvopVISCkig4e+4Yh0FLYPNc9iJNAgXar3u5JpLCw5Qpubtsl8bBj2T2fPJcyYGKn/M8tuKOQgWYLTo6aFRCwlJoe/us2AdBi6Czn7Xhy8IFmuC7+OYSwoPUKvm7rFf');
+              audio.play().catch(() => {});
+            }
+            return 0;
+          }
+          return time - 1;
+        });
+      }, 1000);
+    }
+    
+    return () => clearInterval(interval);
+  }, [isExerciseActive, exerciseTimeLeft, soundEnabled]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
@@ -242,7 +361,7 @@ function Index() {
                         <Card 
                           key={exercise.id}
                           className="p-4 cursor-pointer hover:border-primary/50 transition-all hover:scale-[1.02]"
-                          onClick={() => setSelectedExercise(exercise)}
+                          onClick={() => startExercise(exercise)}
                         >
                           <div className="flex items-start gap-3">
                             <div className={`p-3 rounded-xl ${categoryColors[exercise.category]}/20`}>
@@ -266,6 +385,148 @@ function Index() {
                   </TabsContent>
                 ))}
               </Tabs>
+            </div>
+          )}
+
+          {currentView === 'exercises' && selectedExercise && (
+            <div className="animate-scale-in space-y-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSelectedExercise(null)}
+                className="mb-2"
+              >
+                <Icon name="ArrowLeft" size={16} className="mr-2" />
+                Назад к списку
+              </Button>
+
+              <Card className="p-6 bg-gradient-to-br from-card to-muted/5">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className={`p-4 rounded-2xl ${categoryColors[selectedExercise.category]}/20`}>
+                    <Icon name={selectedExercise.icon as any} size={32} className={categoryColors[selectedExercise.category].replace('bg-', 'text-')} />
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="text-xl font-bold mb-1">{selectedExercise.title}</h2>
+                    <div className="flex gap-2 flex-wrap">
+                      <Badge variant="outline">{categoryNames[selectedExercise.category]}</Badge>
+                      <Badge variant="secondary">{selectedExercise.duration}с</Badge>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <div className="flex items-center justify-center mb-4">
+                    <div className="relative">
+                      <div className="text-6xl font-bold text-primary">
+                        {exerciseTimeLeft !== null ? formatTime(exerciseTimeLeft) : formatTime(selectedExercise.duration)}
+                      </div>
+                      <div className="text-sm text-center text-muted-foreground mt-1">осталось</div>
+                    </div>
+                  </div>
+
+                  <Progress 
+                    value={exerciseTimeLeft !== null ? ((selectedExercise.duration - exerciseTimeLeft) / selectedExercise.duration) * 100 : 0} 
+                    className="h-3 mb-4"
+                  />
+
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={toggleExerciseTimer}
+                      className="flex-1"
+                      size="lg"
+                    >
+                      <Icon name={isExerciseActive ? "Pause" : "Play"} size={20} className="mr-2" />
+                      {isExerciseActive ? 'Пауза' : 'Старт'}
+                    </Button>
+                    {exerciseTimeLeft !== null && exerciseTimeLeft <= 0 && (
+                      <Button
+                        onClick={completeExercise}
+                        variant="default"
+                        className="flex-1 bg-gradient-to-r from-secondary to-accent"
+                        size="lg"
+                      >
+                        <Icon name="Check" size={20} className="mr-2" />
+                        Завершить
+                      </Button>
+                    )}
+                  </div>
+                </div>
+
+                {selectedExercise.benefits && (
+                  <div className="mb-6 p-4 bg-accent/10 rounded-lg border border-accent/20">
+                    <h3 className="font-semibold mb-2 flex items-center gap-2 text-accent">
+                      <Icon name="Sparkles" size={18} />
+                      Польза
+                    </h3>
+                    <ul className="space-y-1 text-sm">
+                      {selectedExercise.benefits.map((benefit, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-accent mt-1">✓</span>
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {selectedExercise.steps && (
+                  <div>
+                    <h3 className="font-semibold mb-3 flex items-center gap-2">
+                      <Icon name="ListOrdered" size={18} className="text-primary" />
+                      Пошаговая инструкция
+                    </h3>
+                    <div className="space-y-3">
+                      {selectedExercise.steps.map((step, idx) => (
+                        <div
+                          key={idx}
+                          className={`flex gap-3 p-3 rounded-lg transition-all ${
+                            idx === currentStep && isExerciseActive
+                              ? 'bg-primary/20 border-2 border-primary scale-105'
+                              : 'bg-muted/30'
+                          }`}
+                        >
+                          <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold ${
+                            idx === currentStep && isExerciseActive
+                              ? 'bg-primary text-primary-foreground'
+                              : 'bg-muted text-muted-foreground'
+                          }`}>
+                            {idx + 1}
+                          </div>
+                          <p className="text-sm flex-1 self-center">{step}</p>
+                          {idx === currentStep && isExerciseActive && (
+                            <Icon name="Activity" size={20} className="text-primary animate-pulse flex-shrink-0" />
+                          )}
+                        </div>
+                      ))}
+                    </div>
+
+                    {selectedExercise.steps && (
+                      <div className="mt-4 flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
+                          disabled={currentStep === 0}
+                          className="flex-1"
+                        >
+                          <Icon name="ChevronLeft" size={16} className="mr-1" />
+                          Назад
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setCurrentStep(Math.min((selectedExercise.steps?.length || 1) - 1, currentStep + 1))}
+                          disabled={currentStep === (selectedExercise.steps?.length || 1) - 1}
+                          className="flex-1"
+                        >
+                          Далее
+                          <Icon name="ChevronRight" size={16} className="ml-1" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </Card>
             </div>
           )}
 
